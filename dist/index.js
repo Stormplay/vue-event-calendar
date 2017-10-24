@@ -276,7 +276,7 @@ module.exports = function normalizeComponent (
   ru: {
     dayNames: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
     monthNames: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
-    format: 'MM/yyyy',
+    format: 'yyyy',
     fullFormat: 'dd/MM/yyyy',
     dayEventsTitle: 'Все события',
     notHaveEvents: 'События отсутствуют'
@@ -296,6 +296,14 @@ module.exports = function normalizeComponent (
     fullFormat: 'dd.MM.yyyy',
     dayEventsTitle: 'Alle Veranstaltungen',
     notHaveEvents: 'Keine Veranstaltungen'
+  },
+  vi: {
+    dayNames: ["T2", "T3", "T4", "T5", "T6", "T7", "CN"],
+    monthNames: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"],
+    format: 'MM/yyyy',
+    fullFormat: 'dd/MM/yyyy',
+    dayEventsTitle: 'Tất cả sự kiện',
+    notHaveEvents: 'Không có sự kiện nào'
   }
 });
 
@@ -595,6 +603,10 @@ var inBrowser = typeof window !== 'undefined';
       var tempDate = Date.parse(new Date(this.calendar.params.curYear + '/' + (this.calendar.params.curMonth + 1) + '/01'));
       return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__tools_js__["b" /* dateTimeFormatter */])(tempDate, this.i18n[this.calendar.options.locale].format);
     },
+    curMonth: function curMonth() {
+      var dateObj = new Date(this.calendar.params.curYear + '/' + (this.calendar.params.curMonth + 1) + '/01');
+      return this.i18n[this.calendar.options.locale].monthNames['' + dateObj.getMonth()];
+    },
     customColor: function customColor() {
       return this.calendar.options.color;
     }
@@ -691,7 +703,7 @@ var inBrowser = typeof window !== 'undefined';
       } else {
         return {
           options: {
-            locale: 'en', //zh
+            locale: 'ru', //zh
             color: ' #f29543'
           },
           params: {
@@ -792,7 +804,7 @@ function install(Vue) {
   var inBrowser = typeof window !== 'undefined';
   var dateObj = new Date();
   var DEFAULT_OPTION = {
-    locale: 'zh', // en
+    locale: 'ru', // en
     color: ' #f29543',
     className: 'selected-day',
     weekStartOn: 0 // 0 mean sunday
@@ -1021,7 +1033,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "arrow-left icon"
   }, [_vm._v(" ")])]), _vm._v(" "), _c('div', {
     staticClass: "title"
-  }, [_vm._v(_vm._s(_vm.curYearMonth))]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.curMonth) + " " + _vm._s(_vm.curYearMonth))]), _vm._v(" "), _c('div', {
     staticClass: "r",
     on: {
       "click": _vm.nextMonth
