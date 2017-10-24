@@ -2,7 +2,7 @@
   <div class="cal-wrapper">
     <div class="cal-header">
       <div class="l" @click="preMonth"><div class="arrow-left icon">&nbsp</div></div>
-      <div class="title">{{curYearMonth}}</div>
+      <div class="title">{{curMonth}} {{curYearMonth}}</div>
       <div class="r" @click="nextMonth"><div class="arrow-right icon">&nbsp</div></div>
     </div>
     <div class="cal-body">
@@ -105,9 +105,13 @@ export default {
       let tempDate = Date.parse(new Date(`${this.calendar.params.curYear}/${this.calendar.params.curMonth+1}/01`))
       return dateTimeFormatter(tempDate, this.i18n[this.calendar.options.locale].format)
     },
+    curMonth () {
+      let dateObj =  new Date(`${this.calendar.params.curYear}/${this.calendar.params.curMonth+1}/01`)
+      return this.i18n[this.calendar.options.locale].monthNames[`${dateObj.getMonth()}`]
+    },
     customColor () {
       return this.calendar.options.color
-    }
+    },
   },
   methods: {
     nextMonth () {
