@@ -61,7 +61,7 @@ export default {
       } else {
         return {
           options: {
-            locale: 'en', //zh
+            locale: 'ru', //zh
             color: ' #f29543'
           },
           params: {
